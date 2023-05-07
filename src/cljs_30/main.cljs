@@ -1,10 +1,7 @@
-(ns ^:figwheel-hooks cljs-30-days.main)
+(ns ^:figwheel-hooks cljs-30.main
+  (:require [cljs-30.day-01-drum-kit :as d01]))
 
 (defonce app-state (atom {:text "Hello world!"}))
-
-(defn new-label []
-  (doto (.createElement js/document "label")
-    (aset "innerHTML" (js/Date.))))
 
 (defn root []
   (.getElementById js/document "app"))
@@ -15,7 +12,7 @@
 (defn mount
   []
   (aset (root) "innerHTML" "")
-  (render (root) (new-label) (.createElement js/document "br") (new-label)))
+  (render (root) (d01/show)))
 
 ;; specify reload hook with ^:after-load metadata
 (defn ^:after-load on-reload []

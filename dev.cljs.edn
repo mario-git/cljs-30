@@ -2,4 +2,4 @@
   :css-dirs ["resources/public/css"]
   :auto-testing true
    }
-{:main cljs-30-days.main}
+{:main cljs-30.main}
