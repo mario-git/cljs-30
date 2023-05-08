@@ -11,8 +11,10 @@
 
 (defn mount
   []
-  (aset (root) "innerHTML" "")
-  (render (root) (d01/show)))
+  (let [{:keys [layout logic-fn]} (d01/load)]
+    (aset (root) "innerHTML" "")
+    (render (root) layout)
+    (logic-fn)))
 
 ;; specify reload hook with ^:after-load metadata
 (defn ^:after-load on-reload []
