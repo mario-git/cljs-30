@@ -1,6 +1,7 @@
 (ns cljs-30.day_01-drum-kit
   (:require-macros [hiccups.core :as hiccups :refer [html]])
-  (:require [hiccups.runtime :as hiccupsrt]))
+  (:require [clojure.string :as s]
+            [hiccups.runtime :as hiccupsrt]))
 
 (def html-template
   (html [:link {:href "css/day-01/style.css"
@@ -24,15 +25,27 @@
          [:div {:data-key 75 :class "key"}
           [:kbd "K"] [:span {:class "sound"} "tom"]]
          [:div {:data-key 76 :class "key"}
-          [:kbd "L"] [:span {:class "sound"} "tink"]]]))
+          [:kbd "L"] [:span {:class "sound"} "tink"]]]
+        [:audio {:data-key 65 :src "sounds/clap.wav"}]
+        [:audio {:data-key 83 :src "sounds/hihat.wav"}]
+        [:audio {:data-key 68 :src "sounds/kick.wav"}]
+        [:audio {:data-key 70 :src "sounds/openhat.wav"}]
+        [:audio {:data-key 71 :src "sounds/boom.wav"}]
+        [:audio {:data-key 72 :src "sounds/ride.wav"}]
+        [:audio {:data-key 74 :src "sounds/snare.wav"}]
+        [:audio {:data-key 75 :src "sounds/tom.wav"}]
+        [:audio {:data-key 76 :src "sounds/tink.wav"}]))
 
 (defn to-div-element [template]
   (doto (.createElement js/document "div")
     (aset "innerHTML" template)))
 
-(defn on-key-down-handler []
-  (let [elems (array-seq (.getElementsByClassName js/document "key"))]
-    (js/console.log "WIP :)" (-> elems first (aget "innerHTML")))))
+(defn- key-down-event-handler [e]
+  (let [key-code (-> e .-key s/upper-case (.charCodeAt 0))
+        audio (.querySelector js/document (str "audio[data-key=\"" key-code "\"]"))]
+    (when audio
+      (.play audio))))
 
 (defn load []
-  {:layout (to-div-element html-template) :logic-fn on-key-down-handler })
+  {:layout (to-div-element html-template)
+   :logic-fn #(.addEventListener js/window "keydown" key-down-event-handler)})
