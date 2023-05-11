@@ -36,16 +36,26 @@
         [:audio {:data-key 75 :src "sounds/tom.wav"}]
         [:audio {:data-key 76 :src "sounds/tink.wav"}]))
 
-(defn to-div-element [template]
+(defn- to-div-element [template]
   (doto (.createElement js/document "div")
     (aset "innerHTML" template)))
 
 (defn- key-down-event-handler [e]
   (let [key-code (-> e .-key s/upper-case (.charCodeAt 0))
-        audio (.querySelector js/document (str "audio[data-key=\"" key-code "\"]"))]
+        audio (.querySelector js/document (str "audio[data-key=\"" key-code "\"]"))
+        key-box (.querySelector js/document (str "div[data-key=\"" key-code "\"]"))]
     (when audio
+      (-> key-box .-classList (.add "playing"))
       (.play audio))))
+
+(defn- end-transition [e]
+  (when (= "transform" (.-propertyName e))
+    (-> e .-target .-classList (.remove "playing"))))
+
+(defn- play-sound-handler []
+  (.addEventListener js/window "keydown" key-down-event-handler)
+  (doall (map #(.addEventListener % "transitionend" end-transition) (.querySelectorAll js/document ".key"))))
 
 (defn load []
   {:layout (to-div-element html-template)
-   :logic-fn #(.addEventListener js/window "keydown" key-down-event-handler)})
+   :logic-fn play-sound-handler})
