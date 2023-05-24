@@ -1,4 +1,4 @@
-(ns cljs-30.day_01-drum-kit
+(ns cljs-30.day_01-vanilla
   (:require-macros [hiccups.core :as hiccups :refer [html]])
   (:require [clojure.string :as s]
             [hiccups.runtime :as hiccupsrt]))
