@@ -9,7 +9,7 @@
 (defonce root (createRoot (gdom/getElement "app")))
 
 (defn mount []
-  (.render root (r/as-element [d01/drum-kit])))
+  (.render root (r/as-element [:f> d01/drum-kit])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in [:__figwheel_counter] inc)

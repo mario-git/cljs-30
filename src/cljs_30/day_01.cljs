@@ -30,13 +30,14 @@
   #_(doall (map #(.addEventListener % "transitionend" end-transition) (.querySelectorAll js/document ".key"))))
 
 (defn drum-kit []
-  #_(play-sound-handler)
-  [:div {:class "keys" :on-key-down #(js/console.log "daje")}
-   [:link {:href "css/day-01/style.css"
-           :rel "stylesheet"
-           :type "text/css"}]
-   (map (fn [{:keys [letter sound] :as item}]
-          ^{:key item}
-          [:div {:data-key letter :class "key"}
-           [:kbd letter] [:span {:class "sound"} sound]
-           [:audio {:data-key letter :src (str "sounds/" sound ".wav")}]]) data)])
+  (let [_ (react/useRef)]
+    (react/useEffect play-sound-handler)
+    [:div {:class "keys" :on-key-down #(js/console.log "daje")}
+     [:link {:href "css/day-01/style.css"
+             :rel "stylesheet"
+             :type "text/css"}]
+     (map (fn [{:keys [letter sound] :as item}]
+            ^{:key item}
+            [:div {:data-key letter :class "key"}
+             [:kbd letter] [:span {:class "sound"} sound]
+             [:audio {:data-key letter :src (str "sounds/" sound ".wav")}]]) data)]))
