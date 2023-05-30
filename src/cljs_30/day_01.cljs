@@ -12,6 +12,7 @@
            {:letter "K" :sound "tom"}
            {:letter "L" :sound "tink"}])
 
+; TODO: this will go
 (defn- key-down-event-handler [e]
   (let [key-code (-> e .-key s/upper-case (.charCodeAt 0))
         audio (.querySelector js/document (str "audio[data-key=\"" key-code "\"]"))
@@ -24,20 +25,20 @@
   (when (= "transform" (.-propertyName e))
     (-> e .-target .-classList (.remove "playing"))))
 
-(defn- play-sound-handler []
-  (js/console.log "test")
-  #_(.addEventListener js/window "keydown" key-down-event-handler)
+(defn- play-sound-handler [set-state-fn]
+  (.addEventListener js/window "keydown" #(set-state-fn (-> % .-key s/upper-case) js/undefined))
   #_(doall (map #(.addEventListener % "transitionend" end-transition) (.querySelectorAll js/document ".key"))))
 
 (defn drum-kit []
-  (let [_ (react/useRef)]
-    (react/useEffect play-sound-handler)
-    [:div {:class "keys" :on-key-down #(js/console.log "daje")}
+  (let [[state set-state-fn] (react/useState "")]
+    (react/useEffect (fn [] (play-sound-handler set-state-fn)))
+    [:div {:class "keys"}
      [:link {:href "css/day-01/style.css"
              :rel "stylesheet"
              :type "text/css"}]
      (map (fn [{:keys [letter sound] :as item}]
             ^{:key item}
-            [:div {:data-key letter :class "key"}
+            [:div {:data-key letter :class (cond-> "key" (= letter state) (str " playing"))}
              [:kbd letter] [:span {:class "sound"} sound]
-             [:audio {:data-key letter :src (str "sounds/" sound ".wav")}]]) data)]))
+             [:audio {:data-key letter :src (str "sounds/" sound ".wav")
+                      :ref (fn [audio] (when (= letter state) (.play audio)))}]]) data)]))
