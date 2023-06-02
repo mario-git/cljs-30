@@ -12,33 +12,21 @@
            {:letter "K" :sound "tom"}
            {:letter "L" :sound "tink"}])
 
-; TODO: this will go
-(defn- key-down-event-handler [e]
-  (let [key-code (-> e .-key s/upper-case (.charCodeAt 0))
-        audio (.querySelector js/document (str "audio[data-key=\"" key-code "\"]"))
-        key-box (.querySelector js/document (str "div[data-key=\"" key-code "\"]"))]
-    (when audio
-      (-> key-box .-classList (.add "playing"))
-      (.play audio))))
-
-(defn- end-transition [e]
-  (when (= "transform" (.-propertyName e))
-    (-> e .-target .-classList (.remove "playing"))))
-
-(defn- play-sound-handler [set-state-fn]
-  (.addEventListener js/window "keydown" #(set-state-fn (-> % .-key s/upper-case) js/undefined))
-  #_(doall (map #(.addEventListener % "transitionend" end-transition) (.querySelectorAll js/document ".key"))))
-
 (defn drum-kit []
   (let [[state set-state-fn] (react/useState "")]
-    (react/useEffect (fn [] (play-sound-handler set-state-fn)))
+    (react/useEffect (fn [] (.addEventListener js/window "keydown" #(set-state-fn (-> % .-key s/upper-case) js/undefined))))
     [:div {:class "keys"}
      [:link {:href "css/day-01/style.css"
              :rel "stylesheet"
              :type "text/css"}]
      (map (fn [{:keys [letter sound] :as item}]
             ^{:key item}
-            [:div {:data-key letter :class (cond-> "key" (= letter state) (str " playing"))}
+            [:div {:data-key letter :class (cond-> "key" (= letter state) (str " playing"))
+                   :on-transition-end (fn [e]
+                                        (when (and (= letter state) (= "transform" (.-propertyName e)))
+                                          (set-state-fn "")))}
              [:kbd letter] [:span {:class "sound"} sound]
              [:audio {:data-key letter :src (str "sounds/" sound ".wav")
-                      :ref (fn [audio] (when (= letter state) (.play audio)))}]]) data)]))
+                      :ref (fn [audio] (when (and (= letter state) (some? audio))
+                                         (set! (.-currentTime audio) 0)
+                                         (.play audio)))}]]) data)]))
