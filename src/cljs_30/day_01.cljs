@@ -19,14 +19,15 @@
      [:link {:href "css/day-01/style.css"
              :rel "stylesheet"
              :type "text/css"}]
-     (map (fn [{:keys [letter sound] :as item}]
-            ^{:key item}
-            [:div {:data-key letter :class (cond-> "key" (= letter state) (str " playing"))
-                   :on-transition-end (fn [e]
-                                        (when (and (= letter state) (= "transform" (.-propertyName e)))
-                                          (set-state-fn "")))}
-             [:kbd letter] [:span {:class "sound"} sound]
-             [:audio {:data-key letter :src (str "sounds/" sound ".wav")
-                      :ref (fn [audio] (when (and (= letter state) (some? audio))
-                                         (set! (.-currentTime audio) 0)
-                                         (.play audio)))}]]) data)]))
+     (map (fn [{:keys [letter sound]}]
+            (let [current? (= letter state)]
+             ^{:key letter}
+             [:div {:data-key letter :class (cond-> "key" current? (str " playing"))
+                    :on-transition-end (fn [e]
+                                         (when (and current? (= "transform" (.-propertyName e)))
+                                           (set-state-fn "")))}
+              [:kbd letter] [:span {:class "sound"} sound]
+              [:audio {:data-key letter :src (str "sounds/" sound ".wav")
+                       :ref (fn [audio] (when (and current? (some? audio))
+                                          (set! (.-currentTime audio) 0)
+                                          (.play audio)))}]])) data)]))
