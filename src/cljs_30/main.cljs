@@ -3,23 +3,40 @@
             [cljs-30.day-01 :as d01]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
+            [react :as react]
             [reagent.core :as r]))
 
-(defonce app-state (atom {:text "Hello world!"}))
-
-(defonce root (createRoot (gdom/getElement "app")))
-
-(defn get-component-name [c] (-> c .-name (s/split "$") last))
 (def challenges [d01/drum-kit])
 
+(def current-component (r/atom nil))
+
+(defn get-component-name [c] (-> c .-name (s/split "$") last))
+
+(defn main-component []
+  [:div
+   (map (fn [c]
+          ^{:key c}
+          [:input {:type "button"
+                   :on-click #(reset! current-component c)
+                   :value (get-component-name c)}])
+        challenges)])
+
+(defn body []
+  (when (nil? @current-component) (reset! current-component main-component))
+  (react/useEffect
+   #(.addEventListener
+     js/window
+     "keydown"
+     (fn [event]
+       (when (= "Escape" (.-key event))
+         (reset! current-component main-component)))
+     js/undefined))
+  [:f> @current-component])
+
 (defn mount []
-  (.render root (r/as-element
-                 [:div
-                  (map (fn [c] [:input {:type "button"
-                                        :on-click #(js/alert "to be bound yet! :)")
-                                        :value (get-component-name c)}])
-                       challenges)]
-                 #_[:f> d01/drum-kit])))
+  (.render
+   (createRoot (gdom/getElement "app"))
+   (r/as-element [:f> body])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
