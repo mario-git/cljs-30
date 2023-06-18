@@ -36,8 +36,10 @@
 
 (defn mount []
   (.render
-   (createRoot (gdom/getElement "app"))
-   (r/as-element [:f> body])))
+   (createRoot (.-body js/document))
+   (r/as-element [:f> ;body
+                  d02/css-js-clock
+                  ])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
