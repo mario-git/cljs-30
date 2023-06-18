@@ -1,12 +1,13 @@
 (ns ^:figwheel-hooks cljs-30.main
   (:require [clojure.string :as s]
             [cljs-30.day-01 :as d01]
+            [cljs-30.day-02 :as d02]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [d01/drum-kit])
+(def challenges [d01/drum-kit d02/css-js-clock])
 
 (def current-component (r/atom nil))
 
