@@ -2,12 +2,13 @@
   (:require [clojure.string :as s]
             [cljs-30.day-01 :as d01]
             [cljs-30.day-02 :as d02]
+            [cljs-30.day-03 :as d03]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [d01/drum-kit d02/css-js-clock])
+(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables])
 
 (def current-component (r/atom nil))
 
