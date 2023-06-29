@@ -1,6 +1,5 @@
 (ns cljs-30.day-02
-  (:require [clojure.string :as s]
-            [react :as react]
+  (:require [react :as react]
             [reagent.core :as r]))
 
 (defn- time-now []
