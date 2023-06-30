@@ -4,12 +4,13 @@
             [cljs-30.day-02 :as d02]
             [cljs-30.day-03 :as d03]
             [cljs-30.day-04 :as d04]
+            [cljs-30.day-05 :as d05]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables d04/array-cardio-1])
+(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables d04/array-cardio-1 d05/flex-panels])
 
 (def current-component (r/atom nil))
 
@@ -39,7 +40,7 @@
 (defn mount []
   (.render
    (createRoot (.-body js/document))
-   (r/as-element [:f> body #_d03/css-variables])))
+   (r/as-element [:f> #_body d05/flex-panels])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
