@@ -38,7 +38,7 @@
 (defn mount []
   (.render
    (createRoot (.-body js/document))
-   (r/as-element [:f> body])))
+   (r/as-element [:f> body #_d03/css-variables])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
