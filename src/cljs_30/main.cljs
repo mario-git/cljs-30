@@ -3,12 +3,13 @@
             [cljs-30.day-01 :as d01]
             [cljs-30.day-02 :as d02]
             [cljs-30.day-03 :as d03]
+            [cljs-30.day-04 :as d04]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables])
+(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables d04/array-cardio-1])
 
 (def current-component (r/atom nil))
 
