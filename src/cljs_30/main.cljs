@@ -40,7 +40,7 @@
 (defn mount []
   (.render
    (createRoot (.-body js/document))
-   (r/as-element [:f> #_body d05/flex-panels])))
+   (r/as-element [:f> body #_d05/flex-panels])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
