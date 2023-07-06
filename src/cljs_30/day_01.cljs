@@ -1,4 +1,4 @@
-(ns cljs-30.day_01
+(ns cljs-30.day-01
   (:require [clojure.string :as s]
             [react :as react]))
 

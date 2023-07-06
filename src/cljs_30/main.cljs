@@ -1,16 +1,17 @@
 (ns ^:figwheel-hooks cljs-30.main
   (:require [clojure.string :as s]
-            [cljs-30.day-01 :as d01]
-            [cljs-30.day-02 :as d02]
-            [cljs-30.day-03 :as d03]
-            [cljs-30.day-04 :as d04]
-            [cljs-30.day-05 :as d05]
+            [cljs-30.day-01 :refer [drum-kit]]
+            [cljs-30.day-02 :refer [css-js-clock]]
+            [cljs-30.day-03 :refer [css-variables]]
+            [cljs-30.day-04 :refer [array-cardio-1]]
+            [cljs-30.day-05 :refer [flex-panels]]
+            [cljs-30.day-06 :refer [type-ahead]]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [d01/drum-kit d02/css-js-clock d03/css-variables d04/array-cardio-1 d05/flex-panels])
+(def challenges [drum-kit css-js-clock css-variables array-cardio-1 flex-panels type-ahead])
 
 (def current-component (r/atom nil))
 
@@ -40,7 +41,7 @@
 (defn mount []
   (.render
    (createRoot (.-body js/document))
-   (r/as-element [:f> body #_d05/flex-panels])))
+   (r/as-element [:f> #_body type-ahead])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
