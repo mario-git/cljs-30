@@ -4,10 +4,14 @@
 (def ^:private cities-state (atom []))
 (def ^:private fetch-promise (-> (js/fetch endpoint) (.then #(.json %))))
 
-(defn cities []
+(defn- cities []
   (when (empty? @cities-state)
     (.then fetch-promise #(reset! cities-state %)))
   @cities-state)
+
+(defn- find-cities [to-find]
+  (let [pattern (re-pattern (str "(?i)" to-find))]
+    (filter #(or (re-find pattern (.-city %)) (re-find pattern (.-state %))) (cities))))
 
 (defn type-ahead []
   [:form.search-form
