@@ -5,7 +5,7 @@
 (def ^:private fetch-promise (-> (js/fetch endpoint) (.then #(.json %))))
 
 (defn cities []
-  (when (nil? @cities-state)
+  (when (empty? @cities-state)
     (.then fetch-promise #(reset! cities-state %)))
   @cities-state)
 
