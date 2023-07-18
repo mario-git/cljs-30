@@ -1,4 +1,4 @@
-(ns cljs-30.day-02
+(ns cljs-30.challenge-02
   (:require [react :as react]
             [reagent.core :as r]))
 
@@ -23,7 +23,7 @@
        (let [i (.setInterval js/window #(reset! time-state (time-now-to-clock-degrees)) 1000)]
          (fn [] (js/clearInterval i)))))
     [:div {:class "clock"}
-     [:link {:href "css/day-02/style.css"
+     [:link {:href "css/challenge-02/style.css"
              :rel "stylesheet"
              :type "text/css"}]
      [:div {:class "clock-face"}

@@ -1,4 +1,4 @@
-(ns cljs-30.day-01
+(ns cljs-30.challenge-01
   (:require [clojure.string :as s]
             [react :as react]))
 
@@ -16,7 +16,7 @@
   (let [[state set-state-fn] (react/useState "")]
     (react/useEffect (fn [] (.addEventListener js/window "keydown" #(set-state-fn (-> % .-key s/upper-case) js/undefined))))
     [:div {:class "keys"}
-     [:link {:href "css/day-01/style.css"
+     [:link {:href "css/challenge-01/style.css"
              :rel "stylesheet"
              :type "text/css"}]
      (map (fn [{:keys [letter sound]}]

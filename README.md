@@ -1,8 +1,8 @@
-## cljs-30-days
+## cljs-30
 
 [JavaScript 30](https://javascript30.com/) in ClojureScript.
 
-Base cljs template ref [here](https://rigsomelight.com/figwheel-main-template/).
+Base cljs template ref: [Figwheel Main](https://rigsomelight.com/figwheel-main-template/).
 
 WIP!
 

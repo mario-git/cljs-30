@@ -1,4 +1,4 @@
-(ns cljs-30.day-06
+(ns cljs-30.challenge-06
   (:require [react :as react]))
 
 (def ^:private endpoint "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json")
@@ -20,7 +20,7 @@
 (defn type-ahead []
   (let [[current-filter set-current-filter] (react/useState "")]
     [:form.search-form
-     [:link {:href "css/day-06/style.css" :rel "stylesheet" :type "text/css"}]
+     [:link {:href "css/challenge-06/style.css" :rel "stylesheet" :type "text/css"}]
      [:input.search
       {:type "text" :placeholder "City or State" :auto-focus true
        :on-change #(set-current-filter (-> % .-target .-value))

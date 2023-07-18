@@ -1,4 +1,4 @@
-(ns cljs-30.day-03
+(ns cljs-30.challenge-03
   (:require [react :as react]))
 
 (defn- handle-update
@@ -17,7 +17,7 @@
   (let [[spacing set-spacing] (react/useState "10")
         [blur set-blur] (react/useState "10")
         [colour set-colour] (react/useState "#ffc600")]
-    [:div [:link {:href "css/day-03/style.css" :rel "stylesheet" :type "text/css"}]
+    [:div [:link {:href "css/challenge-03/style.css" :rel "stylesheet" :type "text/css"}]
      [:h2 "Update CSS Variables with " [:span {:class "hl"} "JS"]]
      [:div.controls
       [:label {:for "spacing"} "Spacing: "]
@@ -34,4 +34,4 @@
       [:input {:id "base" :type "color" :name "base" :value colour
                :on-change (fn [e] (handle-update e set-colour))
                :on-mousemove (fn [e] (handle-update e set-colour))}]]
-     [:img {:src "css/day-03/duck.jpg"}]]))
+     [:img {:src "css/challenge-03/duck.jpg"}]]))
