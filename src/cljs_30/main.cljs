@@ -3,7 +3,7 @@
             [cljs-30.day-01 :refer [drum-kit]]
             [cljs-30.day-02 :refer [css-js-clock]]
             [cljs-30.day-03 :refer [css-variables]]
-            [cljs-30.day-04 :refer [array-cardio-1]]
+            [cljs-30.day-04-and-07 :refer [no-array-cardio]]
             [cljs-30.day-05 :refer [flex-panels]]
             [cljs-30.day-06 :refer [type-ahead]]
             ["react-dom/client" :refer [createRoot]]
@@ -11,7 +11,7 @@
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [drum-kit css-js-clock css-variables array-cardio-1 flex-panels type-ahead])
+(def challenges [drum-kit css-js-clock css-variables no-array-cardio flex-panels type-ahead])
 
 (def current-component (r/atom nil))
 

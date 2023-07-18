@@ -1,4 +1,4 @@
-(ns cljs-30.day-04)
+(ns cljs-30.day-04-and-07)
 
-(defn array-cardio-1 []
+(defn no-array-cardio []
   [:div "PASS - No array cardio needed for Clojure devs :)"])
