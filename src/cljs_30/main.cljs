@@ -11,7 +11,6 @@
             [react :as react]
             [reagent.core :as r]))
 
-;; Pass: day 4&7 (array cardio)
 (def challenges [drum-kit css-js-clock css-variables flex-panels type-ahead fun-with-canvas])
 
 (def current-component (r/atom nil))
@@ -25,7 +24,10 @@
           [:input {:type "button"
                    :on-click #(reset! current-component c)
                    :value (get-component-name c)}])
-        challenges)])
+        challenges)
+   [:div "Challenges skipped:"
+    [:ul
+     [:li "4&7: no array cardio for clojure devs"]]]])
 
 (defn body []
   (when (nil? @current-component) (reset! current-component main-component))
