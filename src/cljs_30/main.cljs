@@ -5,13 +5,14 @@
             [cljs-30.day-03 :refer [css-variables]]
             [cljs-30.day-05 :refer [flex-panels]]
             [cljs-30.day-06 :refer [type-ahead]]
+            [cljs-30.day-08 :refer [fun-with-canvas]]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
 ;; Pass: day 4&7 (array cardio)
-(def challenges [drum-kit css-js-clock css-variables flex-panels type-ahead])
+(def challenges [drum-kit css-js-clock css-variables flex-panels type-ahead fun-with-canvas])
 
 (def current-component (r/atom nil))
 
