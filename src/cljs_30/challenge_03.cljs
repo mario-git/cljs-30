@@ -23,15 +23,15 @@
       [:label {:for "spacing"} "Spacing: "]
       [:input {:id "spacing" :type "range" :name "spacing" :min "10" :max "200" :value spacing
                :on-change (fn [e] (handle-update e set-spacing "px"))
-               :on-mousemove (fn [e] (handle-update e set-spacing "px"))}]
+               :on-mouse-move (fn [e] (handle-update e set-spacing "px"))}]
 
       [:label {:for "blur"} "Blur: "]
       [:input {:id "blur" :type "range" :name "blur" :min "0" :max "25" :value blur
                :on-change (fn [e] (handle-update e set-blur "px"))
-               :on-mousemove (fn [e] (handle-update e set-blur "px"))}]
+               :on-mouse-move (fn [e] (handle-update e set-blur "px"))}]
 
       [:label {:for "base"} "Base Colour: "]
       [:input {:id "base" :type "color" :name "base" :value colour
                :on-change (fn [e] (handle-update e set-colour))
-               :on-mousemove (fn [e] (handle-update e set-colour))}]]
+               :on-mouse-move (fn [e] (handle-update e set-colour))}]]
      [:img {:src "css/challenge-03/duck.jpg"}]]))
