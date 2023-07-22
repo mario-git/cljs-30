@@ -27,7 +27,8 @@
         challenges)
    [:div "Challenges skipped:"
     [:ul
-     [:li "4&7: no array cardio for clojure devs"]]]])
+     [:li "4&7: no array cardio for clojure devs"]
+     [:li "9: no dev tools/console.log tricks"]]]])
 
 (defn body []
   (when (nil? @current-component) (reset! current-component main-component))
