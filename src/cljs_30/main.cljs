@@ -6,12 +6,13 @@
             [cljs-30.challenge-05 :refer [flex-panels]]
             [cljs-30.challenge-06 :refer [type-ahead]]
             [cljs-30.challenge-08 :refer [fun-with-canvas]]
+            [cljs-30.challenge-10 :refer [hold-shift-check]]
             ["react-dom/client" :refer [createRoot]]
             [goog.dom :as gdom]
             [react :as react]
             [reagent.core :as r]))
 
-(def challenges [drum-kit css-js-clock css-variables flex-panels type-ahead fun-with-canvas])
+(def challenges [drum-kit css-js-clock css-variables flex-panels type-ahead fun-with-canvas hold-shift-check])
 
 (def current-component (r/atom nil))
 
@@ -45,7 +46,7 @@
 (defn mount []
   (.render
    (createRoot (.-body js/document))
-   (r/as-element [:f> body #_fun-with-canvas])))
+   (r/as-element [:f> #_body hold-shift-check])))
 
 (defn ^:after-load on-reload [] (mount)
   ;; (swap! app-state update-in  [:__figwheel_counter] inc)
